@@ -36,6 +36,11 @@ void yyerror(char *);
        return IGUAL;
      }
 
+[a-z]      {
+          return OP;
+        }
+
+
 \n   {
        return EOL;
      }
