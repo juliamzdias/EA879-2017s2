@@ -1,6 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #include "imageprocessing.h"
 
@@ -11,6 +12,47 @@ imagem abrir_imagem(char *nome_do_arquivo);
 void salvar_imagem(char *nome_do_arquivo);
 void liberar_imagem(imagem *i);
  */
+
+float max_imagem(imagem* I) {
+  float max = 0, max_aux;
+  int idx;
+  for (int i=0; i< I->width; i++) {
+    for (int j=0; j < I->height; j++) {
+        idx = i + (j * I->width);
+        max_aux = sqrt(pow(I->r[idx], 2) + pow(I->g[idx], 2) + pow(I->b[idx], 2));
+        if(max_aux > max) max = max_aux;
+    }
+  }
+  return max;
+}
+
+imagem brilho_imagem(imagem* I, float fator) {
+   imagem J;
+
+   J.r = malloc(sizeof(float) * I->width * I->height);
+   J.g = malloc(sizeof(float) * I->width * I->height);
+   J.b = malloc(sizeof(float) * I->width * I->height);
+
+   J.height = I->height;
+   J.width = I->width;
+
+   for (int i=0; i< I->width; i++) {
+     for (int j=0; j < I->height; j++) {
+      int idx;
+
+      idx = i + (j * I->width);
+
+      J.r[idx] = fator * I->r[idx];
+      if(J.r[idx] > 255) J.r[idx] = 255;
+      J.g[idx] = fator * I->g[idx];
+      if(J.g[idx] > 255) J.g[idx] = 255;
+      J.b[idx] = fator * I->b[idx];
+      if(J.b[idx] > 255) J.b[idx] = 255;
+    }
+   }
+  return J;
+
+}
 
 imagem abrir_imagem(char *nome_do_arquivo) {
   FIBITMAP *bitmapIn;

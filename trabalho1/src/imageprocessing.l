@@ -1,3 +1,4 @@
+
 %{
 #include <stdlib.h>
 #include <string.h>
@@ -6,51 +7,52 @@ void yyerror(char *);
 #include "y.tab.h"
 %}
 
+
+
 %%
 
-[a-zA-Z0-9]+\.[a-zA-Z]+  {
-              for (int i = 0; i < yyleng; i++ )
-                yylval.strval[i] = yytext[i];
+[a-z]  {
+        yylval.ival = yytext[0] - 'a';
+        return VAR;
+       }
 
-              yylval.strval[yyleng] = '\0';
-              return IMAGE;
-            }
 
-[*/]  {
-          yylval.cval = yytext[0];
-          return OPERATION;
+\" { return ASPA; }
+
+[0-9]+(\.[0-9]+)? {
+  yylval.fval = atof(yytext);
+  return NUM;
+}
+
+[a-zA-Z0-9\.]+  {
+        for (int i = 0; i < yyleng; i++ )
+          yylval.strval[i] = yytext[i];
+
+        yylval.strval[yyleng] = '\0';
+        printf ("Achei nome: %s\n", yylval.strval);
+        return STRING;
+       }
+
+\* { return MULT; }
+
+\[ { return OBRACKET; }
+
+\] { return CBRACKET; }
+
+\/ { return DIV; }
+
+[=]     {
+          return IGUAL;
         }
-
-[0-9]+\.[0-9]+  {
-                  yylval.fval = atof(yytext);
-                  return FLOAT;
-                }
-
-[0-9]+  {
-            yylval.ival = atoi(yytext);
-            return INT;
-          }
-
-[=]   {
-       yylval.cval = yytext[0];
-       return IGUAL;
-     }
-
-[a-z]      {
-          return OP;
-        }
-
 
 \n   {
-       return EOL;
-     }
+         return EOL;
+       }
 
 [ \t]+ ;
 
-.     {
-        printf("**%s**\n", yytext);
-        yyerror("Token nao reconhecido!\n");
-      }
+.     {printf("**%s**\n", yytext);
+yyerror("Token nao reconhecido!\n");}
 
 %%
 
