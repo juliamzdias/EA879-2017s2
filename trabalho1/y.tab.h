@@ -76,7 +76,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 10 "./src/imageprocessing.y" /* yacc.c:1909  */
+#line 11 "./src/imageprocessing.y" /* yacc.c:1909  */
 
   char    strval[50];
   int     ival;

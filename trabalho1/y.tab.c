@@ -138,7 +138,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 10 "./src/imageprocessing.y" /* yacc.c:355  */
+#line 11 "./src/imageprocessing.y" /* yacc.c:355  */
 
   char    strval[50];
   int     ival;
@@ -459,7 +459,7 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    24,    24,    25,    29,    36,    45,    54,    57
+       0,    26,    26,    27,    31,    39,    49,    58,    62
 };
 #endif
 
@@ -1232,44 +1232,44 @@ yyreduce:
   switch (yyn)
     {
         case 4:
-#line 29 "./src/imageprocessing.y" /* yacc.c:1646  */
+#line 31 "./src/imageprocessing.y" /* yacc.c:1646  */
     {
-      printf("Copiando %s para %s\n", (yyvsp[0].strval), (yyvsp[-2].strval));
-      imagem I = abrir_imagem((yyvsp[0].strval));
-      printf("Li imagem %d por %d\n", I.width, I.height);
-      salvar_imagem((yyvsp[-2].strval), &I);
-      liberar_imagem(&I);
+    printf("Copiando %s para %s\n", (yyvsp[0].strval), (yyvsp[-2].strval));
+    imagem I = abrir_imagem((yyvsp[0].strval));
+    printf("Li imagem %d por %d\n", I.width, I.height);
+    salvar_imagem((yyvsp[-2].strval), &I);
+    liberar_imagem(&I);
     }
 #line 1244 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 36 "./src/imageprocessing.y" /* yacc.c:1646  */
+#line 39 "./src/imageprocessing.y" /* yacc.c:1646  */
     {
-      printf("Modificando brilho de %s\n", (yyvsp[-1].strval));
-      imagem I = abrir_imagem((yyvsp[-1].strval));
-      printf("Adicionando %s para %s\n", (yyvsp[-1].strval), (yyvsp[-3].strval));
-      I = brilho_imagem(&I, (yyvsp[0].fval));
-      printf("Li imagem %d por %d\n", I.width, I.height);
-      salvar_imagem((yyvsp[-3].strval), &I);
-      liberar_imagem(&I);
+    printf("Modificando brilho de %s\n", (yyvsp[-1].strval));
+    imagem I = abrir_imagem((yyvsp[-1].strval));
+    printf("Adicionando %s para %s\n", (yyvsp[-1].strval), (yyvsp[-3].strval));
+    I = brilho_imagem(&I, (yyvsp[0].fval));
+    printf("Li imagem %d por %d\n", I.width, I.height);
+    salvar_imagem((yyvsp[-3].strval), &I);
+    liberar_imagem(&I);
     }
 #line 1258 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 45 "./src/imageprocessing.y" /* yacc.c:1646  */
+#line 49 "./src/imageprocessing.y" /* yacc.c:1646  */
     {
-      imagem I = abrir_imagem((yyvsp[-1].strval));
-      float max = max_imagem(&I);
-      printf("O valor máximo de %s é %.2f\n", (yyvsp[-1].strval), max);
-      liberar_imagem(&I);
-    }
+    imagem I = abrir_imagem((yyvsp[-1].strval));
+    float max = max_imagem(&I);
+    printf("O valor máximo de %s é %.2f\n", (yyvsp[-1].strval), max);
+    liberar_imagem(&I);
+  }
 #line 1269 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 54 "./src/imageprocessing.y" /* yacc.c:1646  */
+#line 58 "./src/imageprocessing.y" /* yacc.c:1646  */
     {
       (yyval.fval) = (yyvsp[0].fval);
     }
@@ -1277,7 +1277,7 @@ yyreduce:
     break;
 
   case 8:
-#line 57 "./src/imageprocessing.y" /* yacc.c:1646  */
+#line 62 "./src/imageprocessing.y" /* yacc.c:1646  */
     {
       (yyval.fval) = 1/(yyvsp[0].fval);
     }
@@ -1513,7 +1513,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 65 "./src/imageprocessing.y" /* yacc.c:1906  */
+#line 67 "./src/imageprocessing.y" /* yacc.c:1906  */
 
 
 void yyerror(char *s) {

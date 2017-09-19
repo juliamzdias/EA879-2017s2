@@ -1,4 +1,3 @@
-
 %{
 #include <stdlib.h>
 #include <string.h>
@@ -7,31 +6,29 @@ void yyerror(char *);
 #include "y.tab.h"
 %}
 
-
-
 %%
 
-[a-z]  {
-        yylval.ival = yytext[0] - 'a';
-        return VAR;
-       }
+[a-z] {
+    yylval.ival = yytext[0] - 'a';
+    return VAR;
+     }
 
 
 \" { return ASPA; }
 
 [0-9]+(\.[0-9]+)? {
-  yylval.fval = atof(yytext);
-  return NUM;
+    yylval.fval = atof(yytext);
+    return NUM;
 }
 
 [a-zA-Z0-9\.]+  {
-        for (int i = 0; i < yyleng; i++ )
-          yylval.strval[i] = yytext[i];
+    for (int i = 0; i < yyleng; i++ )
+    yylval.strval[i] = yytext[i];
 
-        yylval.strval[yyleng] = '\0';
-        printf ("Achei nome: %s\n", yylval.strval);
-        return STRING;
-       }
+      yylval.strval[yyleng] = '\0';
+      printf ("Achei nome: %s\n", yylval.strval);
+      return STRING;
+      }
 
 \* { return MULT; }
 
@@ -39,15 +36,11 @@ void yyerror(char *);
 
 \] { return CBRACKET; }
 
-\/ { return DIV; }
+\/  { return DIV; }
 
-[=]     {
-          return IGUAL;
-        }
+[=] { return IGUAL; }
 
-\n   {
-         return EOL;
-       }
+\n   { return EOL; }
 
 [ \t]+ ;
 
